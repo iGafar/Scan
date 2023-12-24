@@ -1,9 +1,44 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 
-const HeaderStyles = styled.header`
-  color: ${(props) => props.theme.colors.main2};
+const Header: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
+  return (
+    <HeaderStyles>
+      <div className="container">
+        <span className="logo">
+          <img src="./logo-header.svg" alt="logo" />
+        </span>
+        <nav data-open={isOpen}>
+          <ul>
+            <li>
+              <a href="#">Главная</a>
+            </li>
+            <li>
+              <a href="#">Тарифы</a>
+            </li>
+            <li>
+              <a href="#">FAQ</a>
+            </li>
+          </ul>
+        </nav>
+        <div className="sign" data-open={isOpen}>
+          <button className="sign-up">Зарегистрироваться</button>
+          <span>|</span>
+          <button className="sign-in">Войти</button>
+        </div>
+        <div onClick={() => setIsOpen((prev) => !prev)} className="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </HeaderStyles>
+  );
+};
+
+const HeaderStyles = styled.header`
   .container {
     display: flex;
     justify-content: space-between;
@@ -15,8 +50,13 @@ const HeaderStyles = styled.header`
     align-items: center;
     gap: 49px;
 
+    li {
+      transition: all 300ms linear;
+    }
+
     li:hover {
       cursor: pointer;
+      color: ${(props) => props.theme.colors.main1};
     }
   }
 
@@ -43,28 +83,49 @@ const HeaderStyles = styled.header`
       font-size: 20px;
     }
   }
+
+  .burger {
+    display: none;
+  }
+
+  @media (max-width: 800px) {
+    header {
+      margin-bottom: 20px;
+    }
+
+    nav {
+      display: none;
+
+			&[data-open=true] {
+				display: block;
+			}
+    }
+
+    .sign {
+      display: none;
+
+			&[data-open=true] {
+				display: block;
+			}
+    }
+
+    .burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      span {
+        display: block;
+        width: 30px;
+        height: 5px;
+        background-color: ${(props) => props.theme.colors.main1};
+      }
+    }
+  }
 `;
 
-export const Header: FC = () => {
-  return (
-    <HeaderStyles>
-      <div className="container">
-        <span className="logo">
-          <img src="/public/logo-header.svg" alt="logo" />
-        </span>
-        <nav>
-          <ul>
-            <li>Главная</li>
-            <li>Тарифы</li>
-            <li>FAQ</li>
-          </ul>
-        </nav>
-        <div className="sign">
-          <button className="sign-up">Зарегистрироваться</button>
-          <span>|</span>
-          <button className="sign-in">Войти</button>
-        </div>
-      </div>
-    </HeaderStyles>
-  );
-};
+export default Header;

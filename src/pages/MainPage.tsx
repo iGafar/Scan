@@ -1,11 +1,16 @@
-import React from 'react'
+import { FC } from "react"
+import DataBlock from "components/MainPage/DataBlock";
+import WhyWe from "components/MainPage/WhyWe";
+import Rates from "components/MainPage/Rates";
 
-type Props = {}
-
-const MainPage = (props: Props) => {
+const MainPage: FC = () => {
 	return (
-		<div>MainPage</div>
+		<main>
+			<DataBlock />
+			<WhyWe />
+			<Rates />
+		</main>
 	)
-}
+};
 
-export default MainPage
+export default MainPage;

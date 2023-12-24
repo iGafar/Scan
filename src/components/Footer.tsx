@@ -3,17 +3,17 @@ import styled from "styled-components";
 
 const FooterStyle = styled.footer`
   background: #029491;
-	color: ${(props) => props.theme.colors.main3};
+  color: ${(props) => props.theme.colors.main3};
 
   .container {
     display: flex;
     justify-content: space-between;
-		align-items: center;
+    align-items: center;
   }
 
-	.info {
-		margin-bottom: 21px;
-	}
+  .info {
+    margin-bottom: 21px;
+  }
 `;
 
 const Footer: FC = () => {
@@ -21,7 +21,7 @@ const Footer: FC = () => {
     <FooterStyle>
       <div className="container">
         <div>
-          <img src="/logo-footer.svg" alt="logo" />
+          <img src="./logo-footer.svg" alt="logo" />
         </div>
 
         <div>

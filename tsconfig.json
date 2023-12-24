@@ -7,8 +7,9 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
-      "components/": ["components/"],
-      "pages/": ["pages/"]
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+			"constants/*": ["constants/*"],
     },
 
     /* Bundler mode */
