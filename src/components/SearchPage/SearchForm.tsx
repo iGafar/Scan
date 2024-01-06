@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import Select from "react-select";
 import styled from "styled-components";
 
@@ -9,7 +10,7 @@ interface ISearchFields {
   quantity: number;
 }
 
-const onSubmit: SubmitHandler<ISearchFields> = (data):void => {
+const onSubmit: SubmitHandler<ISearchFields> = (data): void => {
   console.log(data);
 };
 
@@ -108,7 +109,9 @@ const SearchForm: FC = () => {
           </label>
         </div>
 
-        <button type="submit">Поиск</button>
+        <button type="submit">
+          <Link to={"/issue"}>Поиск</Link>
+        </button>
         <p className="note">* Обязательные к заполнению поля</p>
       </ChekBlockStyle>
     </SearchFormStyle>
@@ -183,7 +186,7 @@ const InfoBlockStyle = styled.div`
       }
 
       .select__indicator {
-        background: url("/public/select-arrow.svg") no-repeat center;
+        background: url(./images/icons/select-arrow.svg) no-repeat center;
         margin-right: 15px;
         transition: all 200ms linear;
         width: 20px;
@@ -248,7 +251,7 @@ const ChekBlockStyle = styled.div`
 
       &::before {
         content: "";
-        background: url("/public/check-arrow.svg") no-repeat 2px 2px;
+        background: url(./check-arrow.svg) no-repeat 2px 2px;
         width: 20px;
         height: 20px;
         display: inline-block;
@@ -277,14 +280,18 @@ const ChekBlockStyle = styled.div`
   button {
     border-radius: 5px;
     background: ${(props) => props.theme.colors.extra3};
-    width: 305px;
-    height: 59px;
     color: ${(props) => props.theme.colors.main3};
     font-size: 22px;
     font-weight: 500;
     letter-spacing: 0.66px;
     margin: auto 0 10px auto;
     transition: all 300ms linear;
+
+    a {
+      display: inline-block;
+      width: 305px;
+      padding: 16px;
+    }
 
     &:hover {
       background-color: ${(props) => props.theme.colors.main1};

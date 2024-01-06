@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header: FC = () => {
@@ -8,18 +9,21 @@ const Header: FC = () => {
     <HeaderStyles>
       <div className="container">
         <span className="logo">
-          <img src="./logo-header.svg" alt="logo" />
+          <img src="./images/icons/logo-header.svg" alt="logo" />
         </span>
         <nav data-open={isOpen}>
           <ul>
             <li>
-              <a href="#">Главная</a>
+              <Link to={"/"}>Главная</Link>
             </li>
             <li>
               <a href="#">Тарифы</a>
             </li>
             <li>
               <a href="#">FAQ</a>
+            </li>
+            <li>
+              <Link to={"/login"}>login</Link>
             </li>
           </ul>
         </nav>
@@ -48,7 +52,8 @@ const HeaderStyles = styled.header`
   ul {
     display: flex;
     align-items: center;
-    gap: 49px;
+    gap: 4.9rem;
+    font-size: 14px;
 
     li {
       transition: all 300ms linear;
@@ -63,14 +68,14 @@ const HeaderStyles = styled.header`
   .sign {
     display: flex;
     align-items: center;
-    gap: 19px;
+    gap: 1.9rem;
 
     &-up {
       opacity: 0.4;
     }
 
     &-in {
-      width: 65px;
+      width: 6.5rem;
       text-align: center;
       padding: 5px;
       border-radius: 5px;
@@ -80,7 +85,7 @@ const HeaderStyles = styled.header`
     span {
       opacity: 0.6;
       color: #029491;
-      font-size: 20px;
+      font-size: 2rem;
     }
   }
 
@@ -90,23 +95,23 @@ const HeaderStyles = styled.header`
 
   @media (max-width: 800px) {
     header {
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
     }
 
     nav {
       display: none;
 
-			&[data-open=true] {
-				display: block;
-			}
+      &[data-open="true"] {
+        display: block;
+      }
     }
 
     .sign {
       display: none;
 
-			&[data-open=true] {
-				display: block;
-			}
+      &[data-open="true"] {
+        display: block;
+      }
     }
 
     .burger {

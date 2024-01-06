@@ -20,7 +20,7 @@ const SortBlock: FC = () => {
 
 const SortBlockStyle = styled.section`
   .top {
-    background: url(./issue_back.png) no-repeat right/contain;
+    background: url(./images/issue_back.png) no-repeat right/contain;
     /* background-position: right; */
     padding: 69px 0 127px;
     h1 {
@@ -43,7 +43,7 @@ const SortBlockStyle = styled.section`
     color: #949494;
     font-size: 18px;
     letter-spacing: 0.36px;
-		margin-bottom: 27px;
+    margin-bottom: 27px;
   }
 `;
 

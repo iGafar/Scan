@@ -10,7 +10,7 @@ const SwiperBlock: FC = () => {
   return (
     <SwiperStyle>
       <button className="button-prev">
-        <img src="/public/slider/arrow.svg" alt="arrow" />
+        <img src="./images/slider/arrow.svg" alt="arrow" />
       </button>
       <Swiper
         spaceBetween={30}
@@ -32,7 +32,7 @@ const SwiperBlock: FC = () => {
       </Swiper>
 
       <button className="button-next">
-        <img src="/public/slider/arrow.svg" alt="arrow" />
+        <img src="./images/slider/arrow.svg" alt="arrow" />
       </button>
     </SwiperStyle>
   );

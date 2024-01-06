@@ -14,7 +14,7 @@ const SearchPage: FC = () => {
             Чем больше заполните, тем точнее поиск
           </p>
 
-					<SearchForm />
+          <SearchForm />
         </div>
       </section>
     </SearchPageStyle>
@@ -23,18 +23,19 @@ const SearchPage: FC = () => {
 
 const SearchPageStyle = styled.main`
   h1 {
-    max-width: 750px;
-    margin-bottom: 25px;
+    max-width: 75rem;
+    margin-bottom: 2.5rem;
   }
 
-	.container {
-		background: url('/public/search-page-back.png') no-repeat bottom right;
-	}
+  .container {
+    background: url("/public/images/search-page-back.png") no-repeat bottom
+      right;
+  }
 
   .container > p {
-    font-size: 20px;
+    font-size: 2rem;
     letter-spacing: 0.4px;
-    margin-bottom: 47px;
+    margin-bottom: 4.7rem;
     position: relative;
 
     &::before {
@@ -46,10 +47,10 @@ const SearchPageStyle = styled.main`
 
     &::after {
       content: url("/public/Document.svg");
-			position: absolute;
-			right: 23%;
-			bottom: -10px;
-			z-index: -1;
+      position: absolute;
+      right: 23%;
+      bottom: -10px;
+      z-index: -1;
     }
   }
 `;

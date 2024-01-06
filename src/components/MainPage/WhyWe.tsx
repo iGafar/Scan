@@ -18,7 +18,7 @@ const WhyWeStyle = styled.section`
 
   .container {
     padding-bottom: 578px;
-    background: url("/public/why_we_back.png") no-repeat bottom/contain;
+    background: url(./images/why_we_back.png) no-repeat bottom/contain;
     background-size: 98%;
   }
 

@@ -75,7 +75,7 @@ const RatesStyle = styled.section`
     position: relative;
 
     &::before {
-      content: url(/public/check.svg);
+      content: url(./images/icons/check.svg);
       position: absolute;
       left: -28px;
     }

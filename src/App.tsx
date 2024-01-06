@@ -2,9 +2,7 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "./constants";
-import MainPage from "pages/MainPage";
-// import IssuePage from "pages/IssuePage";
-// import SearchPage from "pages/SearchPage";
+import Router from "routes/Router";
 
 function App(): JSX.Element {
   return (
@@ -12,9 +10,7 @@ function App(): JSX.Element {
       <Global />
       <div className="wrapper">
         <Header />
-        <MainPage />
-        {/* <SearchPage /> */}
-        {/* <IssuePage /> */}
+        <Router />
         <Footer />
       </div>
     </ThemeProvider>
@@ -22,10 +18,12 @@ function App(): JSX.Element {
 }
 
 const Global = createGlobalStyle`
+	html {
+		font-size: 10px;
+	}
 	body {
     font-family: 'Inter', sans-serif;
 		line-height: normal;
-    /* background-color: ${(props) => props.theme.main3}; */
     color: ${(props) => props.theme.colors.main2};
   }
 	main {
@@ -49,15 +47,35 @@ const Global = createGlobalStyle`
 	}
 
 	h1 {
-		font-size: 40px;
+		font-size: 4rem;
 		letter-spacing: 1.2px;
 	}
 
 	h2 {
-    font-size: 45px;
-    letter-spacing: 0.45px;
+    font-size: 4.5rem;
+    letter-spacing: 0.045rem;
 	}
 
-	`;
+@media (max-width: 1200px) {
+  html,
+  body {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 810px) {
+  html,
+  body {
+    font-size: 6px;
+  }
+}
+
+@media (max-width: 550px) {
+  html,
+  body {
+    font-size: 5px;
+  }
+}
+`;
 
 export default App;

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const DataBlock: FC = () => {
@@ -13,7 +14,9 @@ const DataBlock: FC = () => {
             Комплексный анализ публикаций, получение данных в формате PDF на
             электронную почту.
           </p>
-          <button>Запросить данные</button>
+          <Link to={"/search"}>
+            <button>Запросить данные</button>
+          </Link>
         </div>
       </div>
     </DataBlockStyle>
@@ -21,14 +24,14 @@ const DataBlock: FC = () => {
 };
 
 const DataBlockStyle = styled.section`
-  margin-bottom: 109px;
+  margin-bottom: 10.9rem;
 
   .container {
     display: flex;
     align-items: center;
-    padding-top: 69px;
-    padding-bottom: 90px;
-    background: url("/public/main_back.png") no-repeat bottom/contain;
+    padding-top: 6.9rem;
+    padding-bottom: 9rem;
+    background: url(./images/main_back.png) no-repeat bottom/contain;
     background-position: right;
   }
 
@@ -40,28 +43,28 @@ const DataBlockStyle = styled.section`
   }
 
   h1 {
-    max-width: 743px;
-    margin-bottom: 20px;
-    font-size: 60px;
-    letter-spacing: 0.6px;
+    max-width: 72rem;
+    margin-bottom: 2rem;
+    font-size: 6rem;
+    letter-spacing: 0.06rem;
   }
 
   p {
-    max-width: 534px;
-    font-size: 20px;
-    letter-spacing: 0.2px;
-    margin-bottom: 70px;
+    max-width: 53.5rem;
+    font-size: 2rem;
+    letter-spacing: 0.02rem;
+    margin-bottom: 7rem;
   }
 
   button {
-    width: min(335px, 100%);
-    border-radius: 5px;
+    width: min(33.5rem, 100%);
+    border-radius: 0.5rem;
     background: ${(props) => props.theme.colors.extra3};
     color: ${(props) => props.theme.colors.main3};
-    font-size: 22px;
+    font-size: 2.2rem;
     font-weight: 500;
-    letter-spacing: 0.22px;
-    padding: 16px 0;
+    letter-spacing: 0.022rem;
+    padding: 1.6rem 0;
     transition: all 300ms linear;
 
     &:hover {
@@ -78,12 +81,6 @@ const DataBlockStyle = styled.section`
       padding-bottom: calc(100vw * 620 / 629);
     }
   }
-
-	@media (max-width: 375px) {
-		h1 {
-			font-size: 28px;
-		}
-	}
 `;
 
 export default DataBlock;
