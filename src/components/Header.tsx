@@ -22,15 +22,14 @@ const Header: FC = () => {
             <li>
               <a href="#">FAQ</a>
             </li>
-            <li>
-              <Link to={"/login"}>login</Link>
-            </li>
           </ul>
         </nav>
         <div className="sign" data-open={isOpen}>
           <button className="sign-up">Зарегистрироваться</button>
           <span>|</span>
-          <button className="sign-in">Войти</button>
+          <button className="sign-in">
+            <Link to={"/login"}>Войти</Link>
+          </button>
         </div>
         <div onClick={() => setIsOpen((prev) => !prev)} className="burger">
           <span></span>
@@ -75,11 +74,13 @@ const HeaderStyles = styled.header`
     }
 
     &-in {
-      width: 6.5rem;
-      text-align: center;
-      padding: 5px;
       border-radius: 5px;
       background: #7ce3e1;
+      a {
+        display: inline-block;
+        text-align: center;
+        padding: 5px 10px;
+      }
     }
 
     span {

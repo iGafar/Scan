@@ -27,6 +27,23 @@ const WhyWeStyle = styled.section`
       padding-bottom: calc(100vw * 575 / 1307);
     }
   }
+
+  @media (max-width: 810px) {
+    margin-bottom: 80px;
+		
+    h2 {
+      font-size: 5.6rem;
+      width: 54.8rem;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .container {
+      background: url(./images/why_we_back_mobile.svg) no-repeat bottom right;
+      padding-bottom: calc(100vw * 392 / 360);
+      background-size: 98%;
+    }
+  }
 `;
 
 export default WhyWe;

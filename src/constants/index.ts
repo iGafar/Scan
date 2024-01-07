@@ -68,7 +68,7 @@ export const rates: IRate[] = [
   {
     name: "Beginner",
     description: "Для небольшого исследования",
-    img: "./images/light.svg",
+    img: "./images/icons/light.svg",
     head_color: "#FFB64F",
     price: "799 ₽",
     full_price: "1 200 ₽",
@@ -82,7 +82,7 @@ export const rates: IRate[] = [
   {
     name: "Pro",
     description: "Для HR и фрилансеров",
-    img: "./images/target.svg",
+    img: "./images/icons/target.svg",
     head_color: "#7CE3E1",
     price: "1 299 ₽",
     full_price: "2 600 ₽",
@@ -96,7 +96,7 @@ export const rates: IRate[] = [
   {
     name: "Business",
     description: "Для корпоративных клиентов",
-    img: "./images/laptop.svg",
+    img: "./images/icons/laptop.svg",
     head_color: "#000",
     price: "2 379 ₽",
     full_price: "3 700 ₽",

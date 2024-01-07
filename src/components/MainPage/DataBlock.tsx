@@ -6,18 +6,16 @@ const DataBlock: FC = () => {
   return (
     <DataBlockStyle>
       <div className="container">
-        <div>
-          <h1>
-            сервис по поиску публикаций<br></br>о компании<br></br>по его ИНН
-          </h1>
-          <p>
-            Комплексный анализ публикаций, получение данных в формате PDF на
-            электронную почту.
-          </p>
-          <Link to={"/search"}>
-            <button>Запросить данные</button>
-          </Link>
-        </div>
+        <h1>
+          сервис по поиску публикаций<br></br>о компании<br></br>по его ИНН
+        </h1>
+        <p>
+          Комплексный анализ публикаций, получение данных в формате PDF на
+          электронную почту.
+        </p>
+        <Link to={"/search"}>
+          <button>Запросить данные</button>
+        </Link>
       </div>
     </DataBlockStyle>
   );
@@ -27,19 +25,10 @@ const DataBlockStyle = styled.section`
   margin-bottom: 10.9rem;
 
   .container {
-    display: flex;
-    align-items: center;
     padding-top: 6.9rem;
     padding-bottom: 9rem;
     background: url(./images/main_back.png) no-repeat bottom/contain;
     background-position: right;
-  }
-
-  .back {
-    width: 50vw;
-    img {
-      width: 100%;
-    }
   }
 
   h1 {
@@ -57,14 +46,14 @@ const DataBlockStyle = styled.section`
   }
 
   button {
-    width: min(33.5rem, 100%);
-    border-radius: 0.5rem;
+    width: 335px;
+    border-radius: 5px;
     background: ${(props) => props.theme.colors.extra3};
     color: ${(props) => props.theme.colors.main3};
-    font-size: 2.2rem;
+    font-size: 22px;
     font-weight: 500;
     letter-spacing: 0.022rem;
-    padding: 1.6rem 0;
+    padding: 16px 0;
     transition: all 300ms linear;
 
     &:hover {
@@ -75,12 +64,33 @@ const DataBlockStyle = styled.section`
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 810px) {
+    padding-top: 4rem;
+    margin-bottom: 11.8rem;
+
     .container {
       background-position: bottom;
+      padding-top: 0;
       padding-bottom: calc(100vw * 620 / 629);
     }
+
+    h1 {
+      font-size: 5.6rem;
+      margin-bottom: 3.8rem;
+    }
+
+    p {
+      font-size: 3.6rem;
+      margin-bottom: 6.4rem;
+      width: 65.4rem;
+    }
   }
+
+	@media (max-width: 450px) {
+		button {
+			width: 100%;
+		}
+	}
 `;
 
 export default DataBlock;

@@ -13,9 +13,13 @@ const Rates: FC = () => {
             return (
               <RateStyle key={index}>
                 <div className="head">
-                  <h3>{rate.name}</h3>
-                  <p>{rate.description}</p>
-                  <img src={rate.img} alt={rate.name} />
+                  <div>
+                    <h3>{rate.name}</h3>
+                    <p>{rate.description}</p>
+                  </div>
+                  <picture>
+                    <img src={rate.img} alt={rate.name} />
+                  </picture>
                 </div>
                 <div className="body">
                   <p className="price">
@@ -41,17 +45,42 @@ const Rates: FC = () => {
 };
 
 const RatesStyle = styled.section`
-  margin-bottom: 118px;
+  margin-bottom: 11.8rem;
 
   h2 {
-    margin-bottom: 70px;
+    margin-bottom: 7rem;
   }
+
+  .rates {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3.6rem 10px;
+  }
+
+  @media (max-width: 850px) {
+    .rates {
+      justify-content: center;
+      gap: 4.3rem;
+    }
+  }
+`;
+
+const RateStyle = styled.div`
+  width: calc(33% - 10px);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
 
   h3 {
     font-size: 30px;
     font-weight: 500;
     letter-spacing: 0.3px;
+    margin-bottom: 10px;
   }
+
   h4 {
     font-size: 20px;
     font-weight: 500;
@@ -61,24 +90,8 @@ const RatesStyle = styled.section`
   }
 
   p {
-    font-size: 18px;
+    font-size: max(1.8rem, 14px);
     letter-spacing: 0.18px;
-  }
-
-  ul {
-    margin-bottom: 55px;
-  }
-
-  li {
-    margin-left: 28px;
-    margin-bottom: 5px;
-    position: relative;
-
-    &::before {
-      content: url(./images/icons/check.svg);
-      position: absolute;
-      left: -28px;
-    }
   }
 
   button {
@@ -88,6 +101,7 @@ const RatesStyle = styled.section`
     color: ${(props) => props.theme.colors.main3};
     padding: 18px 0;
     transition: all 300ms linear;
+    font-size: 20px;
 
     &:hover {
       background: ${(props) => props.theme.colors.main1};
@@ -97,62 +111,76 @@ const RatesStyle = styled.section`
     }
   }
 
-  .installment {
-    margin-bottom: 59px;
-  }
-
-  .rates {
-    display: flex;
-    justify-content: space-between;
-  }
-`;
-
-const RateStyle = styled.div`
-  width: 415px;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-
   .head {
     position: relative;
-    padding: 30px 0 34px 30px;
+    padding: 3rem 0 3.4rem 3rem;
     border-radius: 10px 10px 0px 0px;
+    display: flex;
 
-    img {
+    picture {
       position: absolute;
-      right: 10px;
       top: 0;
+      bottom: 0;
+      right: 1rem;
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
   }
 
   .body {
-    padding: 33px 15px 34px 30px;
+    padding: 3.3rem 1.5rem 3.4rem 3rem;
     flex: 1;
     display: flex;
     flex-direction: column;
 
     .price {
-      font-size: 25px;
+      font-size: 30px;
       font-weight: 500;
       letter-spacing: 0.25px;
       margin-bottom: 10px;
 
       .crossed-out {
-        margin-left: 19px;
+        font-size: 25px;
+        margin-left: 1.9rem;
         opacity: 0.5;
         text-decoration: line-through;
+      }
+    }
+
+    .installment {
+      font-size: 18px;
+      margin-bottom: 5.9rem;
+    }
+
+    ul {
+      margin-bottom: max(5.5rem, 39px);
+
+      li {
+        font-size: max(1.6rem, 16px);
+        margin-left: 28px;
+        margin-bottom: 5px;
+        position: relative;
+
+        &:not(:last-child) {
+          margin-bottom: 6px;
+        }
+
+        &::before {
+          content: "";
+          background: url(./images/icons/check.svg) no-repeat center center;
+          background-size: contain;
+          height: 20px;
+          width: 20px;
+          position: absolute;
+          left: -28px;
+        }
       }
     }
   }
 
   &:nth-child(1) .head {
     background-color: ${(props) => props.theme.colors.extra1};
-
-    img {
-      top: 11px;
-    }
   }
 
   &:nth-child(2) .head {
@@ -162,9 +190,66 @@ const RateStyle = styled.div`
   &:nth-child(3) .head {
     background-color: ${(props) => props.theme.colors.main2};
     color: ${(props) => props.theme.colors.main3};
+  }
 
-    img {
-      top: 23px;
+  @media (max-width: 1310px) {
+    .head {
+      picture {
+        top: -1.5rem;
+        right: -0.5rem;
+
+        img {
+          transform: scale(0.8);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1140px) {
+    .head {
+      picture {
+        top: -2.5rem;
+        right: -1rem;
+        img {
+          transform: scale(0.6);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1080px) {
+    .head {
+      picture {
+        top: -1.5rem;
+        right: -1rem;
+      }
+    }
+  }
+
+  @media (max-width: 930px) {
+    .head {
+      p {
+        position: relative;
+        z-index: 2;
+      }
+    }
+  }
+
+  @media (max-width: 850px) {
+    min-width: 335px;
+    .head {
+      padding: 30px 25px 34px;
+
+      picture {
+        top: -3rem;
+        right: -1.5rem;
+      }
+    }
+
+    .body {
+      button {
+        font-size: 18px;
+      }
     }
   }
 `;

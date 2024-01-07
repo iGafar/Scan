@@ -251,7 +251,7 @@ const ChekBlockStyle = styled.div`
 
       &::before {
         content: "";
-        background: url(./check-arrow.svg) no-repeat 2px 2px;
+        background: url(./images/icons/check-arrow.svg) no-repeat 2px 2px;
         width: 20px;
         height: 20px;
         display: inline-block;

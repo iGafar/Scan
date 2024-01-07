@@ -39,7 +39,7 @@ const SwiperBlock: FC = () => {
 };
 
 const breakpoints = {
-  320: {
+  200: {
     slidesPerView: 1,
     spaceBetween: 40,
   },
@@ -87,6 +87,39 @@ const SwiperStyle = styled.div`
 
   .button-prev {
     transform: rotate(180deg);
+  }
+
+  @media (max-width: 810px) {
+    .swiper {
+      padding: 0 4.7rem;
+    }
+    .swiper-wrapper {
+      margin: 6.4rem 0 16rem;
+    }
+    .swiper-slide {
+      padding: 4.4rem 3.56rem 6.2rem;
+      img {
+      }
+
+      p {
+      }
+    }
+
+    .button-prev,
+    .button-next {
+      position: absolute;
+      z-index: 2;
+    }
+
+    .button-prev {
+      left: -2px;
+      transform: rotate(180deg) translateY(50%);
+    }
+
+    .button-next {
+      right: -1px;
+      transform: translateY(-50%);
+    }
   }
 `;
 
