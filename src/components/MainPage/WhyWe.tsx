@@ -30,10 +30,9 @@ const WhyWeStyle = styled.section`
 
   @media (max-width: 810px) {
     margin-bottom: 80px;
-		
+
     h2 {
       font-size: 5.6rem;
-      width: 54.8rem;
     }
   }
 
@@ -42,6 +41,10 @@ const WhyWeStyle = styled.section`
       background: url(./images/why_we_back_mobile.svg) no-repeat bottom right;
       padding-bottom: calc(100vw * 392 / 360);
       background-size: 98%;
+
+      h2 {
+        width: 54.8rem;
+      }
     }
   }
 `;

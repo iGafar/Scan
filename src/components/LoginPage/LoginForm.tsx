@@ -44,8 +44,8 @@ const FormStyle = styled.form`
   background: ${(props) => props.theme.colors.main3};
   color: #949494;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
-  padding: 2.5rem 2.5rem 3.9rem;
-  font-size: max(10px, 1.6rem);
+  padding: 25px 2.5rem 3.9rem;
+  font-size: max(14px, 1.6rem);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -55,16 +55,16 @@ const FormStyle = styled.form`
     background: url(./images/icons/lock.svg) no-repeat center center;
     background-size: contain;
     position: absolute;
-    top: -55px;
-    left: -50px;
+    top: -5.5rem;
+    left: -5rem;
     width: 7.5219rem;
     height: 9.2065rem;
   }
 
   .head {
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 5rem;
+    gap: 15px;
+    margin-bottom: 40px;
 
     p {
       padding: 0 3.7rem 8px;
@@ -80,17 +80,17 @@ const FormStyle = styled.form`
   label {
     display: inline-block;
     &:not(:last-child) {
-      margin-bottom: 2rem;
+      margin-bottom: 20px;
     }
 
     p {
-      margin-bottom: 1.5rem;
+      margin-bottom: 15px;
       letter-spacing: 0.032rem;
     }
 
     input {
       width: 100%;
-      height: 4.3rem;
+      height: 43px;
       border-radius: 0.5rem;
       border: 1px solid #c7c7c7;
       background: ${(props) => props.theme.colors.main3};
@@ -100,14 +100,14 @@ const FormStyle = styled.form`
 
   .submit {
     width: 100%;
-    height: 5.9rem;
+    height: 59px;
     border-radius: 5px;
     background: ${(props) => props.theme.colors.extra3};
     color: ${(props) => props.theme.colors.main3};
-    font-size: 2.2rem;
+    font-size: max(2.2rem, 20px);
     font-weight: 500;
     letter-spacing: 0.044rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 15px;
 
     &:disabled {
       opacity: 0.7;
@@ -116,24 +116,35 @@ const FormStyle = styled.form`
 
   .restore {
     color: ${(props) => props.theme.colors.extra3};
-    font-size: 1.4rem;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0.028rem;
     text-decoration-line: underline;
-    margin-bottom: 3rem;
+    margin-bottom: 30px;
   }
 
   & > p {
-    font-size: 1.6rem;
+    font-size: 16px;
     letter-spacing: 0.032rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 15px;
   }
 
   .social {
     display: flex;
-    gap: 1rem;
+    gap: 10px;
+  }
+
+  @media (max-width: 700px) {
+    margin: 0 auto 49px;
+
+    &:before {
+      width: 75.219px;
+      height: 92.065px;
+      top: -73px;
+      left: 63px;
+    }
   }
 `;
 

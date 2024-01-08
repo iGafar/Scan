@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Select from "react-select";
@@ -16,12 +16,13 @@ const onSubmit: SubmitHandler<ISearchFields> = (data): void => {
 
 const options = [
   { value: "any", label: "Любая" },
-  { value: "2", label: "2" },
-  { value: "3", label: "3" },
+  { value: "positive", label: "Позитивная" },
+  { value: "negative", label: "Негативная" },
 ];
 
 const SearchForm: FC = () => {
   const { register, control, handleSubmit } = useForm<ISearchFields>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <SearchFormStyle onSubmit={handleSubmit(onSubmit)}>
@@ -71,7 +72,14 @@ const SearchForm: FC = () => {
       </InfoBlockStyle>
 
       <ChekBlockStyle>
-        <div>
+        <button
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="list-button"
+          type="button"
+        >
+          {isOpen ? "Закрыть список" : "Открыть список"}
+        </button>
+        <div className={!isOpen ? "list-hide" : ""}>
           <label>
             <input type="checkbox" />
             <span></span>
@@ -123,7 +131,6 @@ const SearchFormStyle = styled.form`
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   padding: 34px 40px;
   max-width: 872px;
-  margin-bottom: 64px;
   display: flex;
   gap: 11px;
 
@@ -133,6 +140,21 @@ const SearchFormStyle = styled.form`
       font-size: 18px;
       letter-spacing: 0.54px;
     }
+  }
+
+  @media (max-width: 1340px) {
+    flex-direction: column;
+    width: max-content;
+  }
+
+  @media (max-width: 900px) {
+    margin: 0 auto 24px auto;
+  }
+
+  @media (max-width: 500px) {
+    width: 100vw;
+    margin-left: -15px;
+    padding: 24px 14px 37px;
   }
 `;
 
@@ -149,6 +171,7 @@ const InfoBlockStyle = styled.div`
       text-align: center;
       padding: 13px 0;
       appearance: none;
+      font-size: 14px;
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
@@ -176,6 +199,7 @@ const InfoBlockStyle = styled.div`
       box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
       max-width: 242px;
       height: 43px;
+      font-size: 14px;
 
       .select__indicator-separator {
         display: none;
@@ -202,6 +226,7 @@ const InfoBlockStyle = styled.div`
 
     .select__menu {
       width: 242px;
+      font-size: 14px;
 
       &-list {
         padding: 0 !important;
@@ -216,11 +241,29 @@ const InfoBlockStyle = styled.div`
       color: ${(props) => props.theme.colors.main3};
     }
   }
+
+  label {
+    input {
+      width: 100%;
+    }
+  }
+
+  .select__control {
+    min-width: 100%;
+  }
+
+  .select__menu {
+    min-width: 100%;
+  }
 `;
 
 const ChekBlockStyle = styled.div`
   display: flex;
   flex-direction: column;
+
+  .list-button {
+    display: none;
+  }
 
   label {
     display: flex;
@@ -303,6 +346,47 @@ const ChekBlockStyle = styled.div`
     letter-spacing: 0.42px;
     width: 305px;
     margin-left: auto;
+    font-size: 14px;
+  }
+
+  @media (max-width: 1340px) {
+    .list-button {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .list-hide {
+      display: none;
+    }
+    div {
+      animation: 500ms opening ease;
+      width: 370px;
+      overflow: hidden;
+    }
+    button {
+      width: 100%;
+    }
+    .note {
+      margin: 0;
+    }
+
+    @keyframes opening {
+      from {
+        transform: translateY(-20px);
+        height: 0px;
+      }
+      to {
+        transform: translateY(0);
+        height: 294px;
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    div {
+      width: 100%;
+    }
   }
 `;
 

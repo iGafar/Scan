@@ -47,7 +47,6 @@ h1, h2 {
 }
 
 h1 {
-	font-size: 4rem;
 	letter-spacing: 1.2px;
 }
 

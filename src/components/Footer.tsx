@@ -31,9 +31,18 @@ const FooterStyle = styled.footer`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    p {
+			text-align: right;
+      font-size: 12px;
+      letter-spacing: 0.12px;
+    }
   }
 
   .info {
+    text-align: right;
+    font-size: 14px;
+    letter-spacing: 0.14px;
     margin-bottom: 21px;
   }
 `;

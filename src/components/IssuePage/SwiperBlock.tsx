@@ -68,10 +68,13 @@ const breakpoints = {
   650: {
     slidesPerView: 4,
   },
-  800: {
+  900: {
+    slidesPerView: 5,
+  },
+  1000: {
     slidesPerView: 6,
   },
-  1150: {
+  1330: {
     slidesPerView: 8,
   },
 };
@@ -94,9 +97,11 @@ const SwiperStyle = styled.div`
     border: 2px solid ${(props) => props.theme.colors.main1};
     border-left: 0px;
     display: flex;
-    padding-right: 20px;
+    padding-right: 18px;
 
     &-slide {
+      font-size: 18px;
+      letter-spacing: 0.36px;
       width: 137px;
       margin: 17px 0;
       display: flex;
@@ -111,6 +116,9 @@ const SwiperStyle = styled.div`
   .block-info {
     display: flex;
     flex-direction: column;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
     gap: 26px;
     padding: 17px 27px;
     color: ${(props) => props.theme.colors.main3};
@@ -145,9 +153,25 @@ const SwiperStyle = styled.div`
     }
   }
 
+  @media (max-width: 750px) {
+    margin-bottom: 57px;
+
+    .block-info {
+      font-size: 18px;
+      letter-spacing: 0.18px;
+    }
+    .swiper-slide {
+      font-size: 16px;
+      letter-spacing: 0.16px;
+    }
+  }
+
   @media (max-width: 450px) {
+    justify-content: center;
+
     .block {
       display: block;
+      padding: 0;
     }
 
     .swiper {
@@ -155,6 +179,7 @@ const SwiperStyle = styled.div`
       padding: 0;
       border: none;
       box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+      width: 298px;
 
       &-slide {
         justify-content: space-between;
@@ -190,6 +215,11 @@ const SwiperStyle = styled.div`
 
     .button-prev {
       transform: rotate(180deg) translateY(-50%);
+      left: -13px;
+    }
+
+    .button-next {
+      right: -13px;
     }
   }
 `;

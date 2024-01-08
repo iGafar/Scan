@@ -109,6 +109,16 @@ export const rates: IRate[] = [
   },
 ];
 
+export interface Document {
+  date: string;
+  source: string;
+  title: string;
+  tag: string;
+  img: string;
+  text: string;
+  words: string;
+}
+
 export const documentsList = [
   {
     date: "13.09.2021",
