@@ -28,8 +28,8 @@ const DocumentCart: FC<{ document: Document }> = ({ document }) => {
 };
 
 const DocumentStyle = styled.div`
-  width: min(641px, 48%);
-  padding: 19px 30px 35px;
+  width: calc(50% - 1.9rem);
+  padding: 19px max(3rem, 20px) max(3.5rem, 18px);
   border-radius: 10px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 
@@ -37,21 +37,20 @@ const DocumentStyle = styled.div`
 
   .info {
     color: #949494;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0.32px;
-    margin-bottom: 24px;
+    font-size: max(1.6rem, 14px);
+    letter-spacing: max(0.032rem, 0.14px);
+    margin-bottom: max(2.4rem, 21px);
 
     span {
-      margin-right: 14px;
+      margin-right: max(1.8rem, 9px);
     }
   }
 
   h3 {
-    font-size: 26px;
+    font-size: max(2.6rem, 19px);
     font-weight: 500;
-    letter-spacing: 0.52px;
-    margin-bottom: 18px;
+    letter-spacing: max(0.052rem, 0.19px);
+    margin-bottom: 14px;
   }
 
   .tag {
@@ -60,6 +59,8 @@ const DocumentStyle = styled.div`
     background: ${(props) => props.theme.colors.extra1};
     padding: 4px 12px;
     margin-bottom: 14px;
+    font-size: 12px;
+    letter-spacing: 0.24px;
   }
 
   .img {
@@ -67,7 +68,7 @@ const DocumentStyle = styled.div`
     overflow: hidden;
     border-radius: 10px;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: max(2rem, 18px);
 
     img {
       margin: auto;
@@ -80,27 +81,29 @@ const DocumentStyle = styled.div`
   }
 
   .text {
-    font-size: 16px;
-    letter-spacing: 0.32px;
+    font-size: max(1.6rem, 12px);
+    letter-spacing: max(0.032rem, 0.12px);
     opacity: 0.5;
-    margin-bottom: 32px;
+    margin-bottom: max(3.2rem, 25px);
   }
 
   .end {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    font-size: 16px;
+    letter-spacing: 0.32px;
 
     button a {
       display: inline-block;
       border-radius: 5px;
       background: ${(props) => props.theme.colors.extra2};
-      padding: 14px 31px;
+      padding: max(1.4rem, 12px) max(3.1rem, 29px);
     }
 
     .words {
       color: #949494;
-      font-size: 16px;
+      font-size: max(1.6rem, 14px);
       letter-spacing: 0.32px;
     }
   }
@@ -113,6 +116,21 @@ const DocumentStyle = styled.div`
     to {
       opacity: 1;
       transform: translateX(0);
+    }
+  }
+
+  @media (max-width: 810px) {
+    h3 {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 750px) {
+    width: 100%;
+    .end {
+      .words {
+        letter-spacing: normal;
+      }
     }
   }
 `;

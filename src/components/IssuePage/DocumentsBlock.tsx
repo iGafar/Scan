@@ -28,16 +28,18 @@ const DocumentsBlock: FC = () => {
 };
 
 const DocumentsBlockStyled = styled.section`
+  margin-bottom: max(10.9rem, 57px);
+
   h2 {
-    margin-bottom: 58px;
+    margin-bottom: max(5.8rem, 34px);
   }
 
   .documents {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 38px;
-    margin-bottom: 38px;
+    margin-bottom: max(3.8rem, 36px);
+    gap: max(3.8rem, 20px) 0;
   }
 
   .container > button {
@@ -47,7 +49,7 @@ const DocumentsBlockStyled = styled.section`
     background-color: ${(props) => props.theme.colors.extra3};
     border-radius: 5px;
     padding: 16px 0;
-    margin: 0 auto 109px;
+    margin: 0 auto;
     color: #fff;
     font-size: 22px;
     font-weight: 500;
@@ -56,6 +58,14 @@ const DocumentsBlockStyled = styled.section`
     &:disabled {
       opacity: 0.8;
       cursor: auto;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .container > button {
+      width: 100%;
+      font-size: 20px;
+      letter-spacing: 0.6px;
     }
   }
 `;
