@@ -1,18 +1,29 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { deauth } from "store/slices/userSlice";
+import { RootState } from "store/store";
 import styled from "styled-components";
 
 const Header: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const isAuth = useSelector((state: RootState) => state.user.isAuth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const deAuth = () => {
+    dispatch(deauth());
+    navigate("/login");
+  };
 
   return (
     <HeaderStyles>
       <div className="container">
-        <span className="logo">
-          <img src="./images/icons/logo-header.svg" alt="logo" />
-        </span>
+        <Link to="/" className="logo">
+          <img src="./icons/logo-header.svg" alt="logo" />
+        </Link>
         <nav data-open={isOpen}>
-          <ul data-open={isOpen} onClick={() => setIsOpen((prev) => !prev)}>
+          <ul onClick={() => setIsOpen((prev) => !prev)}>
             <li>
               <Link to={"/"}>Главная</Link>
             </li>
@@ -24,16 +35,40 @@ const Header: FC = () => {
             </li>
           </ul>
         </nav>
-        <div className="sign" data-open={isOpen}>
-          <button className="sign-up">Зарегистрироваться</button>
-          <span>|</span>
-          <button
-            className="sign-in"
-            onClick={() => setIsOpen((prev) => !prev)}
+        {isAuth ? (
+          <div className="user">
+            <div className="user-data">
+              <p>
+                <span>Использовано компаний</span> <span>34</span>
+              </p>
+              <p>
+                <span>Лимит по компаниям</span> <span>100</span>
+              </p>
+            </div>
+            <div className="user-info" data-open={isOpen}>
+              <div>
+                <p>Aleksey A.</p>
+                <button onClick={() => deAuth()}>Выйти</button>
+              </div>
+              <picture>
+                <img src="/public/images/icon.png" alt="icon" />
+              </picture>
+            </div>
+          </div>
+        ) : (
+          <div
+            className="sign"
+            data-open={isOpen}
+            onClick={() => setIsOpen(false)}
           >
-            <Link to={"/login"}>Войти</Link>
-          </button>
-        </div>
+            <button className="sign-up">Зарегистрироваться</button>
+            <span>|</span>
+            <button className="sign-in">
+              <Link to={"/login"}>Войти</Link>
+            </button>
+          </div>
+        )}
+
         <div
           data-open={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
@@ -53,6 +88,7 @@ const HeaderStyles = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: var(--background);
   }
 
   ul {
@@ -100,17 +136,94 @@ const HeaderStyles = styled.header`
     }
   }
 
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 12.8rem;
+    transition: all 800ms ease-in-out;
+
+    &-data {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding: 12px 10px 15px;
+      border-radius: 5px;
+      background: #d9d9d94d;
+
+      p {
+        span:first-child {
+          font-size: 10px;
+          opacity: 0.4;
+          margin-right: 9px;
+        }
+
+        span:last-child {
+          color: #000;
+          font-size: 14px;
+          font-weight: 700;
+          opacity: 1;
+        }
+
+        &:last-child {
+          span:last-child {
+            color: #8ac540;
+          }
+        }
+      }
+    }
+
+    &-info {
+      display: flex;
+      gap: 5px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 3px;
+
+        p {
+          font-size: 14px;
+          letter-spacing: 0.14px;
+        }
+
+        button {
+          font-size: 10px;
+          opacity: 0.4;
+        }
+      }
+
+      picture {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 32px;
+        height: 32px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
   .burger {
     display: none;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 810px) {
+    .user {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 750px) {
     header {
       margin-bottom: 2rem;
     }
 
     nav {
-      transform: translateY(-1000px);
+      transform: translateY(-100%);
       background: ${(props) => props.theme.colors.main1};
       display: block;
       position: absolute;
@@ -121,12 +234,12 @@ const HeaderStyles = styled.header`
       z-index: 2;
       transition: all 800ms ease-in-out;
 
-			&::before {
-				content: url(./images/icons/logo-footer.svg);
-				position: absolute;
-				top: -22px;
-				left: 15px;
-			}
+      &::before {
+        content: url(./images/icons/logo-footer.svg);
+        position: absolute;
+        top: -22px;
+        left: 15px;
+      }
 
       ul {
         display: flex;
@@ -146,13 +259,13 @@ const HeaderStyles = styled.header`
           cursor: auto;
           color: inherit;
         }
-
-        &[data-open="true"] {
-          transform: scale(1);
-        }
       }
       &[data-open="true"] {
         transform: translateX(0);
+
+        ul {
+          transform: scale(1);
+        }
       }
     }
 
@@ -165,7 +278,7 @@ const HeaderStyles = styled.header`
       bottom: 20%;
       left: 0;
       right: 0;
-      transform: translateY(-1000px);
+      transform: translateY(-100vh);
       transition: all 900ms ease-in-out;
 
       span {
@@ -189,6 +302,35 @@ const HeaderStyles = styled.header`
 
       &[data-open="true"] {
         transform: translateY(0);
+      }
+    }
+
+    .user {
+      &-info {
+        position: absolute;
+        bottom: 20%;
+        transform: translateY(-100vh);
+        transition: all 900ms ease-in-out;
+        z-index: 3;
+        color: #fff;
+        width: 100vw;
+        left: 0;
+        justify-content: center;
+
+        div {
+          align-items: center;
+          p,
+          button {
+            font-size: 25px;
+          }
+        }
+        picture {
+          display: none;
+        }
+
+        &[data-open="true"] {
+          transform: translate(0);
+        }
       }
     }
 

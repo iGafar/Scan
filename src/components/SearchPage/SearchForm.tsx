@@ -210,7 +210,7 @@ const InfoBlockStyle = styled.div`
       }
 
       .select__indicator {
-        background: url(./images/icons/select-arrow.svg) no-repeat center;
+        background: url(./icons/select-arrow.svg) no-repeat center;
         margin-right: 15px;
         transition: all 200ms linear;
         width: 20px;
@@ -294,7 +294,7 @@ const ChekBlockStyle = styled.div`
 
       &::before {
         content: "";
-        background: url(./images/icons/check-arrow.svg) no-repeat 2px 2px;
+        background: url(./icons/check-arrow.svg) no-repeat 2px 2px;
         width: 20px;
         height: 20px;
         display: inline-block;

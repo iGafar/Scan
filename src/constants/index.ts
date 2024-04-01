@@ -1,3 +1,5 @@
+export const BASE_URL: string = "https://gateway.scan-interfax.ru";
+
 export const sliderCarts: { id: number; img: string; text: string }[] = [
   {
     id: 0,
@@ -68,7 +70,7 @@ export const rates: IRate[] = [
   {
     name: "Beginner",
     description: "Для небольшого исследования",
-    img: "./images/icons/light.svg",
+    img: "./icons/light.svg",
     head_color: "#FFB64F",
     price: "799 ₽",
     full_price: "1 200 ₽",
@@ -82,7 +84,7 @@ export const rates: IRate[] = [
   {
     name: "Pro",
     description: "Для HR и фрилансеров",
-    img: "./images/icons/target.svg",
+    img: "./icons/target.svg",
     head_color: "#7CE3E1",
     price: "1 299 ₽",
     full_price: "2 600 ₽",
@@ -96,7 +98,7 @@ export const rates: IRate[] = [
   {
     name: "Business",
     description: "Для корпоративных клиентов",
-    img: "./images/icons/laptop.svg",
+    img: "./icons/laptop.svg",
     head_color: "#000",
     price: "2 379 ₽",
     full_price: "3 700 ₽",

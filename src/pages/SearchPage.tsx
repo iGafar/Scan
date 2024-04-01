@@ -41,7 +41,7 @@ const SearchPageStyle = styled.main`
 
     &::before {
       content: "";
-      background: url(./images/icons/Folders.svg) no-repeat center/contain;
+      background: url(./icons/Folders.svg) no-repeat center/contain;
       width: 140.608px;
       height: 68.394px;
       position: absolute;
@@ -51,7 +51,7 @@ const SearchPageStyle = styled.main`
 
     &::after {
       content: "";
-      background: url(./images/icons/Document.svg) no-repeat center/contain;
+      background: url(./icons/Document.svg) no-repeat center/contain;
       width: 91px;
       height: 111.118px;
       position: absolute;

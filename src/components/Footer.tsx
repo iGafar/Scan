@@ -6,7 +6,7 @@ const Footer: FC = () => {
     <FooterStyle>
       <div className="container">
         <div>
-          <img src="./images/icons/logo-footer.svg" alt="logo" />
+          <img src="./icons/logo-footer.svg" alt="logo" />
         </div>
 
         <div>
@@ -33,7 +33,7 @@ const FooterStyle = styled.footer`
     align-items: center;
 
     p {
-			text-align: right;
+      text-align: right;
       font-size: 12px;
       letter-spacing: 0.12px;
     }

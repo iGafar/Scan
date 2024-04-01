@@ -1,8 +1,11 @@
 import LoginForm from "components/LoginPage/LoginForm";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import styled from "styled-components";
 
 const LoginPage: FC = () => {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <LoginPageStyle>
       <section>

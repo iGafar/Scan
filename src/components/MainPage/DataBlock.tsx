@@ -1,8 +1,12 @@
 import { FC } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "store/store";
 import styled from "styled-components";
 
 const DataBlock: FC = () => {
+  const isAuth = useSelector((state: RootState) => state.user.isAuth);
+
   return (
     <DataBlockStyle>
       <div className="container">
@@ -13,9 +17,11 @@ const DataBlock: FC = () => {
           Комплексный анализ публикаций, получение данных в формате PDF на
           электронную почту.
         </p>
-        <Link to={"/search"}>
-          <button>Запросить данные</button>
-        </Link>
+        {isAuth && (
+          <Link to={"/search"}>
+            <button>Запросить данные</button>
+          </Link>
+        )}
       </div>
     </DataBlockStyle>
   );
@@ -86,11 +92,11 @@ const DataBlockStyle = styled.section`
     }
   }
 
-	@media (max-width: 450px) {
-		button {
-			width: 100%;
-		}
-	}
+  @media (max-width: 450px) {
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 export default DataBlock;

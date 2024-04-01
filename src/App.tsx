@@ -3,19 +3,18 @@ import Footer from "components/Footer";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "./constants";
 import Router from "routes/Router";
+import { FC } from "react";
 
-function App(): JSX.Element {
+const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Global />
-      <div className="wrapper">
-        <Header />
-        <Router />
-        <Footer />
-      </div>
+      <Header />
+      <Router />
+      <Footer />
     </ThemeProvider>
   );
-}
+};
 
 const Global = createGlobalStyle`
 html {
@@ -34,7 +33,7 @@ main {
 	margin: 0 auto;
 	padding: 0 30px;
 }
-.wrapper {
+#root {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;

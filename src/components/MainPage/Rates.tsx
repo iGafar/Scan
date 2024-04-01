@@ -168,7 +168,7 @@ const RateStyle = styled.div`
 
         &::before {
           content: "";
-          background: url(./images/icons/check.svg) no-repeat center center;
+          background: url(./icons/check.svg) no-repeat center center;
           background-size: contain;
           height: 20px;
           width: 20px;

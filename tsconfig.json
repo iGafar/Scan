@@ -6,11 +6,11 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "baseUrl": "src",
-    "paths": {
-      "components/*": ["components/*"],
-      "pages/*": ["pages/*"],
-			"constants/*": ["constants/*"],
-    },
+    // "paths": {
+    //   "components/*": ["components/*"],
+    //   "pages/*": ["pages/*"],
+		// 	"constants/*": ["constants/*"],
+    // },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

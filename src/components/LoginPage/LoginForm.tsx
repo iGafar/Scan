@@ -1,20 +1,50 @@
 import { FC } from "react";
 import styled from "styled-components";
+import { login } from "store/slices/userSlice";
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import { IUser } from "@types";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm: FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IUser>();
+
+  const onSubmit = handleSubmit((data) => {
+    dispatch(login(data));
+    navigate("/");
+  });
+
   return (
-    <FormStyle>
+    <FormStyle onSubmit={onSubmit}>
       <div className="head">
         <p className="active">Войти</p>
         <p>Зарегистрироваться</p>
       </div>
       <label>
         <p>Логин или номер телефона:</p>
-        <input type="text" />
+        <input
+          type="text"
+          {...register("login", {
+            required: true,
+          })}
+        />
+        {errors?.login ? <p className="error">Введите логин</p> : null}
       </label>
       <label>
         <p>Пароль:</p>
-        <input type="password" />
+        <input
+          type="password"
+          {...register("password", {
+            required: true,
+          })}
+        />
+        {errors?.login ? <p className="error">Введите пароль</p> : null}
       </label>
       <button className="submit" type="submit">
         Войти
@@ -25,13 +55,13 @@ const LoginForm: FC = () => {
       <p>Войти через:</p>
       <div className="social">
         <button disabled>
-          <img src="./images/icons/google.png" alt="google" />
+          <img src="./icons/google.png" alt="google" />
         </button>
         <button disabled>
-          <img src="./images/icons/facebook.png" alt="facebook" />
+          <img src="./icons/facebook.png" alt="facebook" />
         </button>
         <button disabled>
-          <img src="./images/icons/yandex.png" alt="yandex" />
+          <img src="./icons/yandex.png" alt="yandex" />
         </button>
       </div>
     </FormStyle>
@@ -52,7 +82,7 @@ const FormStyle = styled.form`
 
   &::before {
     content: "";
-    background: url(./images/icons/lock.svg) no-repeat center center;
+    background: url(./icons/lock.svg) no-repeat center center;
     background-size: contain;
     position: absolute;
     top: -5.5rem;
@@ -79,6 +109,7 @@ const FormStyle = styled.form`
 
   label {
     display: inline-block;
+    position: relative;
     &:not(:last-child) {
       margin-bottom: 20px;
     }
@@ -93,8 +124,17 @@ const FormStyle = styled.form`
       height: 43px;
       border-radius: 0.5rem;
       border: 1px solid #c7c7c7;
+      padding-left: 10px;
       background: ${(props) => props.theme.colors.main3};
       box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .error {
+      padding: 5px 10px;
+      position: absolute;
+      color: red;
+      right: 0;
+      top: 50%;
     }
   }
 
