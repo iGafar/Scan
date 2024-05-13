@@ -1,18 +1,18 @@
 import { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Select from "react-select";
+import { search } from "store/slices/histogramsSlice";
+import { AppDispatch } from "store/store";
 import styled from "styled-components";
 
 interface ISearchFields {
   INN: string;
   tonality: { value: string; label: string };
   quantity: number;
+  startDate: number;
+  endDate: number;
 }
-
-const onSubmit: SubmitHandler<ISearchFields> = (data): void => {
-  console.log(data);
-};
 
 const options = [
   { value: "any", label: "Любая" },
@@ -20,9 +20,82 @@ const options = [
   { value: "negative", label: "Негативная" },
 ];
 
+const checkboxData = [
+  "Признак максимальной полноты",
+  "Упоминания в бизнес-контексте",
+  "Главная роль в публикации",
+  "Публикации только с риск-факторами",
+  "Включать технические новости рынков",
+  "Включать анонсы и календари",
+  "Включать сводки новостей",
+];
+
 const SearchForm: FC = () => {
   const { register, control, handleSubmit } = useForm<ISearchFields>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onSubmit: SubmitHandler<ISearchFields> = (data): void => {
+    console.log(data.startDate);
+
+    dispatch(
+      search({
+        issueDateInterval: {
+          startDate: "2019-01-01T00:00:00+03:00",
+          endDate: "2022-08-31T23:59:59+03:00",
+        },
+        searchContext: {
+          targetSearchEntitiesContext: {
+            targetSearchEntities: [
+              {
+                type: "company",
+                sparkId: null,
+                entityId: null,
+                inn: 7736207543,
+                maxFullness: true,
+                inBusinessNews: null,
+              },
+            ],
+            onlyMainRole: true,
+            tonality: "any",
+            onlyWithRiskFactors: false,
+            riskFactors: {
+              and: [],
+              or: [],
+              not: [],
+            },
+            themes: {
+              and: [],
+              or: [],
+              not: [],
+            },
+          },
+          themesFilter: {
+            and: [],
+            or: [],
+            not: [],
+          },
+        },
+        searchArea: {
+          includedSources: [],
+          excludedSources: [],
+          includedSourceGroups: [],
+          excludedSourceGroups: [],
+        },
+        attributeFilters: {
+          excludeTechNews: true,
+          excludeAnnouncements: true,
+          excludeDigests: true,
+        },
+        similarMode: "duplicates",
+        limit: 1000,
+        sortType: "sourceInfluence",
+        sortDirectionType: "desc",
+        intervalType: "month",
+        histogramTypes: ["totalDocuments", "riskFactors"],
+      })
+    );
+  };
 
   return (
     <SearchFormStyle onSubmit={handleSubmit(onSubmit)}>
@@ -33,7 +106,9 @@ const SearchForm: FC = () => {
             type="number"
             placeholder="10 цифр"
             id="INN"
-            {...register("INN")}
+            {...register("INN", {
+              required: true,
+            })}
           />
         </label>
 
@@ -44,11 +119,12 @@ const SearchForm: FC = () => {
             control={control}
             render={({ field }) => (
               <Select
+                {...register("tonality", { required: true })}
                 classNamePrefix="select"
                 className="select"
                 {...field}
                 options={options}
-                defaultValue={options[0]}
+                placeholder="Выберите тональность"
               />
             )}
           />
@@ -59,15 +135,25 @@ const SearchForm: FC = () => {
           <input
             type="number"
             placeholder="От 1 до 1000"
-            {...register("quantity")}
+            {...register("quantity", { required: true })}
           />
         </label>
 
         <label>
           <p>Диапазон поиска*</p>
 
-          <input type="date" placeholder="Дата начала" className="date" />
-          <input type="date" placeholder="Дата конца" className="date" />
+          <input
+            type="date"
+            placeholder="Дата начала"
+            className="date"
+            {...register("startDate", { required: true })}
+          />
+          <input
+            type="date"
+            placeholder="Дата конца"
+            className="date"
+            {...register("endDate", { required: true })}
+          />
         </label>
       </InfoBlockStyle>
 
@@ -80,46 +166,16 @@ const SearchForm: FC = () => {
           {isOpen ? "Закрыть список" : "Открыть список"}
         </button>
         <div className={!isOpen ? "list-hide" : ""}>
-          <label>
-            <input type="checkbox" />
-            <span></span>
-            <p> Признак максимальной полноты</p>
-          </label>
-          <label>
-            <input type="checkbox" />
-            <span></span>
-            <p>Упоминания в бизнес-контексте</p>
-          </label>
-          <label>
-            <input type="checkbox" />
-            <span></span>
-            <p>Главная роль в публикации</p>
-          </label>
-          <label>
-            <input type="checkbox" />
-            <span></span>
-            <p>Публикации только с риск-факторами</p>
-          </label>
-          <label>
-            <input type="checkbox" />
-            <span></span>
-            <p>Включать технические новости рынков</p>
-          </label>
-          <label>
-            <input type="checkbox" />
-            <span></span>
-            <p>Включать анонсы и календари</p>
-          </label>
-          <label>
-            <input type="checkbox" />
-            <span></span>
-            <p>Включать сводки новостей</p>
-          </label>
+          {checkboxData.map((text, index) => (
+            <label key={index}>
+              <input type="checkbox" />
+              <span></span>
+              <p>{text}</p>
+            </label>
+          ))}
         </div>
 
-        <button type="submit">
-          <Link to={"/issue"}>Поиск</Link>
-        </button>
+        <button type="submit">Поиск</button>
         <p className="note">* Обязательные к заполнению поля</p>
       </ChekBlockStyle>
     </SearchFormStyle>
@@ -329,12 +385,8 @@ const ChekBlockStyle = styled.div`
     letter-spacing: 0.66px;
     margin: auto 0 10px auto;
     transition: all 300ms linear;
-
-    a {
-      display: inline-block;
-      width: 305px;
-      padding: 16px;
-    }
+    padding: 16px;
+    width: 305px;
 
     &:hover {
       background-color: ${(props) => props.theme.colors.main1};

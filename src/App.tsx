@@ -3,20 +3,32 @@ import Footer from "components/Footer";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "./constants";
 import Router from "routes/Router";
-import { FC } from "react";
+import { FC, useCallback, useState } from "react";
 
 const App: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const isOpenCallback = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 810) {
+      setIsOpen(false);
+    }
+  });
+
   return (
     <ThemeProvider theme={theme}>
-      <Global />
-      <Header />
+      <Global $isOpen={isOpen} />
+      <Header setIsOpen={isOpenCallback} isOpen={isOpen} />
       <Router />
       <Footer />
     </ThemeProvider>
   );
 };
 
-const Global = createGlobalStyle`
+const Global = createGlobalStyle<{ $isOpen: boolean }>`
 html {
 	font-size: 10px;
 }
@@ -24,6 +36,7 @@ body {
 	font-family: 'Inter', sans-serif;
 	line-height: normal;
 	color: ${(props) => props.theme.colors.main2};
+	overflow: ${(props) => (props.$isOpen ? "hidden" : "")};
 }
 main {
 	flex-grow: 1;

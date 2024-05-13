@@ -1,13 +1,21 @@
-import { FC, useState } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { deauth } from "store/slices/userSlice";
+import { deauth, info } from "store/slices/userSlice";
 import { RootState } from "store/store";
 import styled from "styled-components";
+import UserData from "./UserData";
 
-const Header: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface IProps {
+  isOpen: boolean;
+  setIsOpen: () => void;
+}
+
+const Header: FC<IProps> = ({ isOpen, setIsOpen }) => {
   const isAuth = useSelector((state: RootState) => state.user.isAuth);
+  const { usedCompany, companyLimit } = useSelector(
+    (state: RootState) => state.user
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,6 +24,10 @@ const Header: FC = () => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    if (isAuth) dispatch(info());
+  }, [dispatch, usedCompany, companyLimit, isAuth]);
+
   return (
     <HeaderStyles>
       <div className="container">
@@ -23,7 +35,7 @@ const Header: FC = () => {
           <img src="./icons/logo-header.svg" alt="logo" />
         </Link>
         <nav data-open={isOpen}>
-          <ul onClick={() => setIsOpen((prev) => !prev)}>
+          <ul onClick={() => setIsOpen()}>
             <li>
               <Link to={"/"}>Главная</Link>
             </li>
@@ -37,14 +49,8 @@ const Header: FC = () => {
         </nav>
         {isAuth ? (
           <div className="user">
-            <div className="user-data">
-              <p>
-                <span>Использовано компаний</span> <span>34</span>
-              </p>
-              <p>
-                <span>Лимит по компаниям</span> <span>100</span>
-              </p>
-            </div>
+            <UserData companyLimit={companyLimit} usedCompany={usedCompany} />
+
             <div className="user-info" data-open={isOpen}>
               <div>
                 <p>Aleksey A.</p>
@@ -56,11 +62,7 @@ const Header: FC = () => {
             </div>
           </div>
         ) : (
-          <div
-            className="sign"
-            data-open={isOpen}
-            onClick={() => setIsOpen(false)}
-          >
+          <div className="sign" data-open={isOpen} onClick={() => setIsOpen()}>
             <button className="sign-up">Зарегистрироваться</button>
             <span>|</span>
             <button className="sign-in">
@@ -69,11 +71,7 @@ const Header: FC = () => {
           </div>
         )}
 
-        <div
-          data-open={isOpen}
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="burger"
-        >
+        <div data-open={isOpen} onClick={() => setIsOpen()} className="burger">
           <span></span>
           <span></span>
           <span></span>
@@ -88,7 +86,7 @@ const HeaderStyles = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--background);
+    background: ${(props) => props.theme.colors.main3};
   }
 
   ul {
@@ -141,36 +139,6 @@ const HeaderStyles = styled.header`
     align-items: center;
     gap: 12.8rem;
     transition: all 800ms ease-in-out;
-
-    &-data {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      padding: 12px 10px 15px;
-      border-radius: 5px;
-      background: #d9d9d94d;
-
-      p {
-        span:first-child {
-          font-size: 10px;
-          opacity: 0.4;
-          margin-right: 9px;
-        }
-
-        span:last-child {
-          color: #000;
-          font-size: 14px;
-          font-weight: 700;
-          opacity: 1;
-        }
-
-        &:last-child {
-          span:last-child {
-            color: #8ac540;
-          }
-        }
-      }
-    }
 
     &-info {
       display: flex;
