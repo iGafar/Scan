@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SearchOptions } from "@types";
-import axios from "axios";
+import { instance } from "api/api.config";
 import { BASE_URL } from "constants";
 
 export const search = createAsyncThunk<null, SearchOptions>(
@@ -9,8 +9,8 @@ export const search = createAsyncThunk<null, SearchOptions>(
     try {
       console.log("json", JSON.stringify(params));
 
-      const { data } = await axios.post(
-        `${BASE_URL}/api/v1/objectsearch/histohrams`,
+      const { data } = await instance.post(
+        `${BASE_URL}/api/v1/objectsearch/histograms`,
         JSON.stringify(params)
       );
 

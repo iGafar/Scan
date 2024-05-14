@@ -8,7 +8,8 @@ export const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
-	config.headers['Access-Control-Allow-Credentials'] = true
+  config.headers["Access-Control-Allow-Credentials"] = true;
+  config.headers["content-type"] = "application/json-patch+json";
   return config;
 });
 

@@ -44,7 +44,7 @@ interface SearchContext {
   targetSearchEntitiesContext: {
     targetSearchEntities: SearchEntity[];
     onlyMainRole: boolean;
-    tonality: "any";
+    tonality: string;
     onlyWithRiskFactors: boolean;
     riskFactors: { and: string[]; or: string[]; not: string[] };
     themes: { and: string[]; or: string[]; not: string[] };
